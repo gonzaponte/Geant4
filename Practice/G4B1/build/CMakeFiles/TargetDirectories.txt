@@ -1,0 +1,2 @@
+/Users/Gonzalo/github/Geant4/Practice/G4B1/build/CMakeFiles/B1.dir
+/Users/Gonzalo/github/Geant4/Practice/G4B1/build/CMakeFiles/exampleB1.dir

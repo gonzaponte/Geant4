@@ -1,0 +1,73 @@
+# Create an OpenGL view:
+/vis/open OGL 600x600-0+0
+/vis/sceneHandler/create OGL
+/vis/sceneHandler/attach
+/vis/viewer/create ! ! 600x600-0+0
+/vis/viewer/refresh
+# Disable auto refresh and quieten vis messages whilst scene and trajectories are established:
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+# Draw geometry:
+/vis/drawVolume
+/vis/scene/create
+/vis/scene/add/volume world
+/vis/scene/notifyHandlers
+/vis/sceneHandler/attach
+# Specify view angle:
+/vis/viewer/set/viewpointVector 0 0 1
+/vis/viewer/set/lightsVector -1 0 0
+# Specify style (surface, wireframe, auxiliary edges,...)
+/vis/viewer/set/style wireframe
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 200
+# Draw smooth trajectories at end of event, showing trajectory points
+# as markers 2 pixels wide:
+/vis/scene/add/trajectories smooth
+/tracking/storeTrajectory 2
+/vis/scene/notifyHandlers
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/scene/notifyHandlers scene-0
+/vis/scene/notifyHandlers scene-1
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+/vis/scene/notifyHandlers scene-0
+/vis/scene/notifyHandlers scene-1
+# To superimpose all of the events from a given run:
+/vis/scene/endOfEventAction accumulate
+# Axes, scale, etc.
+/vis/scene/add/scale
+/vis/scene/notifyHandlers
+/vis/scene/add/axes
+/vis/scene/notifyHandlers
+# Frame
+/vis/set/colour red
+/vis/set/lineWidth 2
+/vis/scene/add/frame
+/vis/scene/notifyHandlers
+/vis/set/colour
+/vis/set/lineWidth
+# To get nice view
+/vis/geometry/set/visibility logWorld 0 false
+/vis/scene/notifyHandlers
+/vis/geometry/set/visibility innerlog 0 false
+/vis/scene/notifyHandlers
+/vis/geometry/set/visibility detectionlog 0 true
+/vis/scene/notifyHandlers
+/vis/geometry/set/visibility outerlog 0 false
+/vis/scene/notifyHandlers
+/vis/geometry/set/colour innerlog 0 1 0 0 0.1
+/vis/scene/notifyHandlers
+/vis/geometry/set/colour detectionlog 0 1 0.5 0 0.2
+/vis/scene/notifyHandlers
+/vis/geometry/set/colour outerlog 0 1 0 0 0.1
+/vis/scene/notifyHandlers
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenMarker true
+/vis/viewer/set/viewpointThetaPhi 60 120
+# Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true
+/vis/viewer/refresh
+/vis/verbose warnings
+/gun/particle mu-
+/gun/energy 10 GeV
+/run/beamOn 20
